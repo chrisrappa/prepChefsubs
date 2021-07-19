@@ -1,20 +1,14 @@
 package com.example.springboot;
 
 
-import lombok.Data;
 
-import javax.persistence.*;
 
-@Data
-@Entity
-@Table(name="USERS")
 public class User {
 
-  @Id
-  @GeneratedValue
+
   private Long id;
 
-  @Column
+
   private String userName;
 
   public User() {};
