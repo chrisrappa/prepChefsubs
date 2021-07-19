@@ -1,21 +1,43 @@
 package com.example.springboot;
 
+
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
+@Table(name="USERS")
 public class User {
 
-  String name;
-  String email;
-  String address;
-  String paymentMethod;
-  Boolean isAdmin;
-  String subscriptionStatus;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-  public User(String name, String email, String address, String paymentMethod, Boolean isAdmin, String subscriptionStatus) {
-    this.name = name;
-    this.email = email;
-    this.address = address;
-    this.paymentMethod = paymentMethod;
-    this.isAdmin = isAdmin;
-    this.subscriptionStatus = subscriptionStatus;
+  @Column
+  private String userName;
+
+  public User() {};
+
+  public User(String userName) {
+    this.userName = userName;
   }
 
+
 }
+//import lombok.Data;
+//
+//@Data
+//
+//public class User {
+//
+//  String name;
+//  String type;
+//
+//
+//  public User(String name, String type) {
+//    this.name = name;
+//    this.type = type;
+//  }
+//
+//}

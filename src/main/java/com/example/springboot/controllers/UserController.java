@@ -1,14 +1,25 @@
 package com.example.springboot.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.springboot.User;
+import com.example.springboot.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/users", method = RequestMethod.GET)
 public class UserController {
 
-  @GetMapping("/user")
-  public String user(){
-    return "This is the user controller";
+  @Autowired
+  UserService userService;
+
+  @GetMapping("/{userName}")
+  public ResponseEntity<User> getUserDetails(@PathVariable String userName) throws Exception{
+
+    User user = userService.getUserDetails(userName);
+    return new ResponseEntity<>(user, HttpStatus.OK);
+
   }
 
 }
