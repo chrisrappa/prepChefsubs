@@ -14,6 +14,7 @@ public class UserController {
   @Autowired
   UserService userService;
 
+
   @GetMapping("/{userName}")
   public ResponseEntity<User> getUserDetails(@PathVariable String userName) throws Exception{
 

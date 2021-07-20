@@ -2,6 +2,7 @@ package com.example.springboot.controllers;
 
 
 import com.example.springboot.User;
+import com.example.springboot.exceptions.UserNotFoundException;
 import com.example.springboot.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = UserController.class)
 class UserControllerTest {
 
-
-
   @Autowired
   MockMvc mockMvc;
 
   @MockBean
   UserService userService;
+
 
   @Test
   public void getUserDetailsTest() throws Exception{
@@ -36,5 +36,13 @@ class UserControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").isMap())
             .andExpect(jsonPath("userName").value("Tom"));
+  }
+
+  @Test
+  void userNotFoundHTTPStatus() throws Exception {
+    given(userService.getUserDetails(Mockito.anyString())).willThrow(new UserNotFoundException());
+
+    mockMvc.perform(MockMvcRequestBuilders.get("/users/Tom"))
+            .andExpect(status().isNotFound());
   }
 }
