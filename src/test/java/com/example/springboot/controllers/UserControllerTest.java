@@ -44,5 +44,6 @@ class UserControllerTest {
 
     mockMvc.perform(MockMvcRequestBuilders.get("/users/Tom"))
             .andExpect(status().isNotFound());
+
   }
 }
